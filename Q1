@@ -1,0 +1,20 @@
+import socket
+def main():
+    server_host = "izani.synology.me"
+    server_port = 8443
+ try:
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.connect((server_host, server_port))
+        print(f"Connected to {server_host}:{server_port}")
+        message = "2021898802"
+        client_socket.sendall(message.encode())
+        data = client_socket.recv(1024)
+        print("Received:", data.decode())
+        client_socket.close()
+        print("Connection closed.")
+   except ConnectionRefusedError:
+        print("Connection refused. Please make sure the server is running.")
+    except Exception as e:
+        print("Error:", e)
+if __name__ == "__main__":
+    main()
